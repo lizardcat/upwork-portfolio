@@ -1,0 +1,47 @@
+---
+// src/components/sections/Experience.astro
+import ExperienceItem from '../ui/ExperienceItem.astro';
+
+const experiences = [
+  {
+    title: 'Senior SEO Content Specialist',
+    company: 'Freelancer (Upwork)',
+    location: 'Remote',
+    description: '[Please provide your recent work experience details here - I\'ll update this with your specific experience, achievements, and responsibilities]',
+    skills: ['SEO Content', 'Keyword Research', 'Content Strategy', 'On-Page SEO', 'Editing', 'Proofreading']
+  },
+  {
+    title: 'Content Editor & Writer',
+    company: '[Previous Company Name]',
+    location: '[Location]',
+    description: '[Please provide your previous work experience details here - I\'ll update this with your specific experience, achievements, and responsibilities]',
+    skills: ['Content Writing', 'Copy Editing', 'Proofreading', 'Content Strategy']
+  }
+];
+---
+
+<section id="experience" class="py-20 bg-gray-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">Work Experience</h2>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <!-- Timeline -->
+      <div class="relative">
+        <!-- Vertical Line -->
+        <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-700"></div>
+
+        {experiences.map(experience => (
+          <ExperienceItem 
+            title={experience.title}
+            company={experience.company}
+            location={experience.location}
+            description={experience.description}
+            skills={experience.skills}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

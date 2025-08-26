@@ -1,0 +1,60 @@
+---
+// src/components/sections/Services.astro
+import ServiceCard from '../ui/ServiceCard.astro';
+import SearchIcon from '../icons/SearchIcon.astro';
+import EditIcon from '../icons/EditIcon.astro';
+
+const services = [
+  {
+    icon: 'search',
+    title: 'SEO Content Writing',
+    description: 'High-quality, keyword-optimized content that ranks on Google while engaging your audience. Blog posts, articles, and web copy that drives traffic.'
+  },
+  {
+    icon: 'lightbulb',
+    title: 'On-Page SEO Optimization',
+    description: 'Complete on-page SEO audit and optimization. Title tags, meta descriptions, header structure, and content optimization for better search rankings.'
+  },
+  {
+    icon: 'edit',
+    title: 'Content Editing',
+    description: 'Professional editing for clarity, flow, and engagement. Transform your existing content into polished pieces that convert readers into customers.'
+  },
+  {
+    icon: 'check',
+    title: 'Proofreading',
+    description: 'Meticulous proofreading for grammar, spelling, punctuation, and formatting. Perfect for final drafts that need professional polish.'
+  },
+  {
+    icon: 'trending',
+    title: 'Keyword Research',
+    description: 'In-depth keyword research to identify high-value opportunities. Find the terms your audience is searching for and outrank competitors.'
+  },
+  {
+    icon: 'strategy',
+    title: 'Content Strategy',
+    description: 'Develop comprehensive content strategies that align with your business goals and drive organic traffic growth over time.'
+  }
+];
+---
+
+<section id="services" class="py-20 bg-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">Services & Skills</h2>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        Comprehensive SEO content services to boost your rankings and perfect your messaging
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map(service => (
+        <ServiceCard 
+          icon={service.icon}
+          title={service.title}
+          description={service.description}
+        />
+      ))}
+    </div>
+  </div>
+</section>

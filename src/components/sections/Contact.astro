@@ -1,0 +1,59 @@
+---
+// src/components/sections/Contact.astro
+import Button from '../ui/Button.astro';
+import UpworkIcon from '../icons/UpworkIcon.astro';
+
+const benefits = [
+  'Proven SEO results that increase organic traffic',
+  'Fast turnaround without compromising quality',
+  'Deep understanding of Google\'s ranking factors',
+  'Experience across multiple industries and niches'
+];
+---
+
+<section id="contact" class="py-20 bg-gray-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">Ready to Boost Your Rankings?</h2>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        Let's work together to create SEO content that drives traffic and grows your business. Available for new projects on Upwork.
+      </p>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-gray-800 rounded-2xl p-8 lg:p-12 border border-gray-700">
+        <div class="grid lg:grid-cols-2 gap-12">
+          <div>
+            <h3 class="text-2xl font-bold text-white mb-6">Why Choose Alex?</h3>
+            <div class="space-y-4">
+              {benefits.map(benefit => (
+                <div class="flex items-start space-x-3">
+                  <svg class="w-6 h-6 text-orange-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <p class="text-gray-300">{benefit}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="bg-gray-700 rounded-xl p-6 border border-gray-600">
+            <h3 class="text-xl font-bold text-white mb-4">Let's Start Your Project</h3>
+            <p class="text-gray-300 mb-6">
+              All projects are handled through Upwork to ensure secure payments, clear communication, and project protection for both of us.
+            </p>
+            <Button 
+                href="https://www.upwork.com/freelancers/~0141cff0aab119da4c"
+                variant="primary"
+                external={true}
+                fullWidth={true}
+                >
+                Hire Alex on Upwork
+            </Button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
