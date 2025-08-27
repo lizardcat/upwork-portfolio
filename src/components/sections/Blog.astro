@@ -2,57 +2,68 @@
 // src/components/sections/Blog.astro
 import BlogCard from '../ui/BlogCard.astro';
 import Button from '../ui/Button.astro';
+import { getCollection } from 'astro:content';
 
-const blogPosts = [
-  {
-    image: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=240&fit=crop',
-    category: 'SEO Strategy',
-    title: 'How to Create SEO Content That Ranks in 2025',
-    description: 'Learn the latest SEO content strategies that are driving results in today\'s competitive landscape.',
-    slug: 'seo-content-strategy-2025'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1562577309-2592ab84b1bc?w=400&h=240&fit=crop',
-    category: 'Keyword Research',
-    title: 'The Complete Guide to Keyword Research',
-    description: 'Master keyword research with proven techniques to find high-value, low-competition opportunities.',
-    slug: 'keyword-research-guide'
-  },
-  {
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=240&fit=crop',
-    category: 'On-Page SEO',
-    title: 'On-Page SEO Checklist for Better Rankings',
-    description: 'Essential on-page SEO elements every page needs to rank higher and drive more organic traffic.',
-    slug: 'on-page-seo-checklist'
-  }
-];
+const allPosts = await getCollection('blog');
+
+// Sort all posts by date (newest first)
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Show the 3 most recent posts (regardless of featured status)
+const postsToShow = sortedPosts.slice(0, 3);
+
+const getPostImage = (slug: string) => {
+  const imageMap: Record<string, string> = {
+    'seo-content-strategy-2025': '/blog-1.jpg',
+    'keyword-research-guide': '/blog-2.jpg',
+    'on-page-seo-checklist': '/blog-3.jpg'
+  };
+  return imageMap[slug] || '/blog-1.jpg';
+};
 ---
 
 <section id="blog" class="py-20 bg-gray-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16">
-      <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">Featured Posts</h2>
+      <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">Latest Posts</h2>
       <p class="text-xl text-gray-300 max-w-3xl mx-auto">
         Insights and tips on SEO, content writing, and digital marketing
       </p>
     </div>
     
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {blogPosts.map(post => (
-        <BlogCard 
-          image={post.image}
-          category={post.category}
-          title={post.title}
-          description={post.description}
-          slug={post.slug}
-        />
-      ))}
-    </div>
+    {postsToShow.length > 0 ? (
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {postsToShow.map(post => (
+          <BlogCard 
+            image={getPostImage(post.slug)}
+            category={post.data.category || 'Blog'}
+            title={post.data.title}
+            description={post.data.description}
+            slug={post.slug}
+            publishDate={post.data.pubDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long', 
+              day: 'numeric'
+            })}
+            readTime={post.data.readTime}
+            comingSoon={false}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center">
+        <h3 class="text-2xl font-bold text-white mb-4">No posts yet</h3>
+        <p class="text-gray-300">Check back soon for SEO tips and insights!</p>
+      </div>
+    )}
 
     <div class="text-center mt-12">
-      <span class="inline-flex items-center px-8 py-4 bg-gray-600 text-gray-300 font-semibold rounded-lg cursor-not-allowed">
-        Blog Coming Soon
-      </span>
+      <Button 
+        href="/blog"
+        variant="primary"
+      >
+        View All Posts
+      </Button>
     </div>
   </div>
 </section>
