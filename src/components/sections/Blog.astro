@@ -1,5 +1,6 @@
 ---
 // src/components/sections/Blog.astro
+import { getPostImage } from '../../config/site';
 import BlogCard from '../ui/BlogCard.astro';
 import Button from '../ui/Button.astro';
 import { getCollection } from 'astro:content';
@@ -11,15 +12,6 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 
 // Show the 3 most recent posts (regardless of featured status)
 const postsToShow = sortedPosts.slice(0, 3);
-
-const getPostImage = (slug: string) => {
-  const imageMap: Record<string, string> = {
-    'seo-content-strategy-2025': '/blog-1.jpg',
-    'keyword-research-guide': '/blog-3.jpg',
-    'on-page-seo-checklist': '/blog-2.jpg'
-  };
-  return imageMap[slug] || '/blog-1.jpg';
-};
 ---
 
 <section id="blog" class="py-20 bg-gray-800">

@@ -1,5 +1,6 @@
 ---
 // src/components/sections/Contact.astro
+import { SITE_CONFIG } from '../../config/site';
 import Button from '../ui/Button.astro';
 
 const benefits = [
@@ -23,7 +24,7 @@ const benefits = [
       <div class="bg-gray-800 rounded-2xl p-8 lg:p-12 border border-gray-700">
         <div class="grid lg:grid-cols-2 gap-12">
           <div>
-            <h3 class="text-2xl font-bold text-white mb-6">Why Choose Alex?</h3>
+            <h3 class="text-2xl font-bold text-white mb-6">Why Choose {SITE_CONFIG.name}?</h3>
             <div class="space-y-4">
               {benefits.map(benefit => (
                 <div class="flex items-start space-x-3">
@@ -42,12 +43,12 @@ const benefits = [
               All projects are handled through Upwork to ensure secure payments, clear communication, and project protection for both of us.
             </p>
             <Button 
-                href="https://www.upwork.com/freelancers/~0141cff0aab119da4c"
+                href={SITE_CONFIG.upworkProfile}
                 variant="primary"
                 external={true}
                 fullWidth={true}
                 >
-                Hire Alex on Upwork
+                Hire {SITE_CONFIG.name} on Upwork
             </Button>
 
           </div>

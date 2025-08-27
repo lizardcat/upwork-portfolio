@@ -1,16 +1,21 @@
+---
+// src/components/layout/Navigation.astro
+import { NAVIGATION_ITEMS, SITE_CONFIG } from '../../config/site';
+---
+
 <!-- Navigation -->
 <nav class="fixed top-0 w-full bg-gray-800/90 backdrop-blur-sm border-b border-gray-700 z-50">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 		<div class="flex justify-between items-center py-4">
 			<a href="/" class="text-2xl font-bold text-violet-400 hover:text-violet-300 transition-colors">
-				Alex Raza
+				{SITE_CONFIG.name}
 			</a>
 			<div class="hidden md:flex space-x-8">
-				<a href="/#home" class="text-gray-300 hover:text-violet-500 transition-colors">Home</a>
-				<a href="/#services" class="text-gray-300 hover:text-violet-500 transition-colors">Services</a>
-				<a href="/#experience" class="text-gray-300 hover:text-violet-500 transition-colors">Experience</a>
-				<a href="/blog" class="text-gray-300 hover:text-violet-500 transition-colors">Blog</a>
-				<a href="/#contact" class="text-gray-300 hover:text-violet-500 transition-colors">Contact</a>
+				{NAVIGATION_ITEMS.map(item => (
+					<a href={item.href} class="text-gray-300 hover:text-violet-500 transition-colors">
+						{item.name}
+					</a>
+				))}
 			</div>
 			<button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-gray-300 hover:text-violet-500 hover:bg-gray-700">
 				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -22,11 +27,11 @@
 		<!-- Mobile Menu -->
 		<div id="mobile-menu" class="hidden md:hidden pb-4">
 			<div class="flex flex-col space-y-2">
-				<a href="/#home" class="text-gray-300 hover:text-violet-500 transition-colors py-2 px-4 rounded">Home</a>
-				<a href="/#services" class="text-gray-300 hover:text-violet-500 transition-colors py-2 px-4 rounded">Services</a>
-				<a href="/#experience" class="text-gray-300 hover:text-violet-500 transition-colors py-2 px-4 rounded">Experience</a>
-				<a href="/blog" class="text-gray-300 hover:text-violet-500 transition-colors py-2 px-4 rounded">Blog</a>
-				<a href="/#contact" class="text-gray-300 hover:text-violet-500 transition-colors py-2 px-4 rounded">Contact</a>
+				{NAVIGATION_ITEMS.map(item => (
+					<a href={item.href} class="text-gray-300 hover:text-violet-500 transition-colors py-2 px-4 rounded">
+						{item.name}
+					</a>
+				))}
 			</div>
 		</div>
 	</div>

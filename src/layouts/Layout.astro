@@ -1,5 +1,7 @@
 ---
 // src/layouts/Layout.astro
+import { SITE_CONFIG } from '../config/site';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -8,13 +10,13 @@ export interface Props {
 }
 
 const {
-  title = "Alex Raza | SEO Content Specialist, Editor & Proofreader",
-  description = "Professional SEO content specialist, editor, and proofreader Alex Raza. Boost your rankings with expert content optimization, editing, and proofreading services.",
+  title = SITE_CONFIG.title,
+  description = SITE_CONFIG.description,
   image = "/favicon.svg",
   canonical
 } = Astro.props;
 
-const canonicalURL = canonical || new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = canonical || new URL(Astro.url.pathname, SITE_CONFIG.url);
 ---
 
 <!doctype html>

@@ -1,5 +1,6 @@
 ---
 // src/pages/blog/index.astro
+import { getPostImage } from '../../config/site';
 import Layout from '../../layouts/Layout.astro';
 import Navigation from '../../components/layout/Navigation.astro';
 import Footer from '../../components/layout/Footer.astro';
@@ -8,16 +9,6 @@ import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('blog');
 const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-// Generate image URLs using your local images
-const getPostImage = (slug: string) => {
-  const imageMap: Record<string, string> = {
-    'seo-content-strategy-2025': '/blog-1.jpg',
-    'keyword-research-guide': '/blog-2.jpg',
-    'on-page-seo-checklist': '/blog-3.jpg'
-  };
-  return imageMap[slug] || '/blog-1.jpg';
-};
 ---
 
 <Layout>
