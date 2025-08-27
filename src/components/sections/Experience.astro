@@ -49,6 +49,10 @@ const experiences = [
     skills: ['Content Writing', 'Editorial Writing', 'Magazine Publishing', 'Feature Articles', 'Editorial Strategy', 'Cultural Content']
   }
 ];
+
+// Show first 2 experiences by default
+const initialExperiences = experiences.slice(0, 2);
+const additionalExperiences = experiences.slice(2);
 ---
 
 <section id="experience" class="py-20 bg-gray-900">
@@ -61,18 +65,126 @@ const experiences = [
       <div class="relative">
         <!-- Vertical Line -->
         <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-700"></div>
-        {experiences.map(experience => (
-          <ExperienceItem 
-            title={experience.title}
-            company={experience.company}
-            companyUrl={experience.companyUrl}
-            location={experience.location}
-            period={experience.period}
-            description={experience.description}
-            skills={experience.skills}
-          />
-        ))}
+        
+        <!-- Initial experiences (always visible) -->
+        <div id="initial-experiences">
+          {initialExperiences.map(experience => (
+            <ExperienceItem 
+              title={experience.title}
+              company={experience.company}
+              companyUrl={experience.companyUrl}
+              location={experience.location}
+              period={experience.period}
+              description={experience.description}
+              skills={experience.skills}
+            />
+          ))}
+        </div>
+
+        <!-- Additional experiences (initially hidden) -->
+        <div id="additional-experiences" class="hidden">
+          {additionalExperiences.map(experience => (
+            <ExperienceItem 
+              title={experience.title}
+              company={experience.company}
+              companyUrl={experience.companyUrl}
+              location={experience.location}
+              period={experience.period}
+              description={experience.description}
+              skills={experience.skills}
+            />
+          ))}
+        </div>
+
+        <!-- Show More/Show Less Button -->
+        {additionalExperiences.length > 0 && (
+          <div class="text-center mt-12">
+            <button 
+              id="toggle-experience-btn"
+              class="inline-flex items-center px-6 py-3 bg-violet-500/20 border border-violet-500 text-violet-400 font-semibold rounded-lg hover:bg-violet-500 hover:text-white transition-all duration-300 group"
+            >
+              <span id="btn-text">Show More Experience</span>
+              <svg 
+                id="btn-icon" 
+                class="ml-2 w-5 h-5 transition-transform duration-300" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('toggle-experience-btn');
+    const additionalExperiences = document.getElementById('additional-experiences');
+    const btnText = document.getElementById('btn-text');
+    const btnIcon = document.getElementById('btn-icon');
+    
+    if (toggleBtn && additionalExperiences && btnText && btnIcon) {
+      let isExpanded = false;
+      
+      toggleBtn.addEventListener('click', function() {
+        if (isExpanded) {
+          // Collapse
+          additionalExperiences.classList.add('hidden');
+          btnText.textContent = 'Show More Experience';
+          btnIcon.style.transform = 'rotate(0deg)';
+          isExpanded = false;
+          
+          // Smooth scroll to experience section
+          document.getElementById('experience')?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        } else {
+          // Expand
+          additionalExperiences.classList.remove('hidden');
+          btnText.textContent = 'Show Less Experience';
+          btnIcon.style.transform = 'rotate(180deg)';
+          isExpanded = true;
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Smooth animation for the additional experiences */
+  #additional-experiences {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  #additional-experiences.hidden {
+    animation: fadeOut 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+</style>
