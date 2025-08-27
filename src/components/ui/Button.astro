@@ -1,0 +1,64 @@
+---
+// src/components/ui/Button.astro
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  external?: boolean;
+  fullWidth?: boolean;
+  disabled?: boolean;
+  class?: string;
+}
+
+const { 
+  variant = 'primary', 
+  size = 'md', 
+  href, 
+  external = false, 
+  fullWidth = false, 
+  disabled = false,
+  class: className = ''
+} = Astro.props;
+
+const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2';
+
+const variantClasses = {
+  primary: 'bg-violet-500 text-white hover:bg-violet-600 disabled:bg-gray-500',
+  secondary: 'bg-gray-600 text-white hover:bg-gray-700 disabled:bg-gray-500',
+  outline: 'border-2 border-violet-500 text-violet-500 hover:bg-violet-500 hover:text-white disabled:border-gray-500 disabled:text-gray-500'
+};
+
+const sizeClasses = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3',
+  lg: 'px-8 py-4 text-lg'
+};
+
+const classes = [
+  baseClasses,
+  variantClasses[variant],
+  sizeClasses[size],
+  fullWidth ? 'w-full' : '',
+  disabled ? 'cursor-not-allowed' : '',
+  className
+].filter(Boolean).join(' ');
+
+const linkProps = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+{href ? (
+  <a href={href} class={classes} {...linkProps}>
+    <slot name="icon" />
+    <slot />
+    {external && (
+      <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+      </svg>
+    )}
+  </a>
+) : (
+  <button class={classes} disabled={disabled}>
+    <slot name="icon" />
+    <slot />
+  </button>
+)}
