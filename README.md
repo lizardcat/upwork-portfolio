@@ -11,7 +11,7 @@ This repository contains the source code for the Upwork-specific subdomain of al
 ## Deployment
 
 - Hosted separately from the main domain.
-- Deployed via Netlify
+- Deployed via Cloudflare
 - Domain: upwork.alexraza.com
 
 ## Notes
