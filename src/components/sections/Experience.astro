@@ -4,18 +4,49 @@ import ExperienceItem from '../ui/ExperienceItem.astro';
 
 const experiences = [
   {
-    title: 'Senior SEO Content Specialist',
-    company: 'Freelancer (Upwork)',
-    location: 'Remote',
-    description: '[Please provide your recent work experience details here - I\'ll update this with your specific experience, achievements, and responsibilities]',
-    skills: ['SEO Content', 'Keyword Research', 'Content Strategy', 'On-Page SEO', 'Editing', 'Proofreading']
+    title: 'SEO Team Lead',
+    company: 'BrightPageSEO',
+    companyUrl: 'https://brightpageseo.com',
+    location: 'Nairobi | Remote',
+    period: 'March 2024 - Present',
+    description: 'Leading SEO content strategies and managing team performance to drive organic growth. Overseeing keyword research initiatives, content optimization processes, and on-page SEO implementations. Mentoring team members on best practices for search engine optimization and content creation. Collaborating with cross-functional teams to align SEO strategies with business objectives.',
+    skills: ['Team Leadership', 'SEO Strategy', 'Content Management', 'Performance Analytics', 'Team Training', 'Project Management']
   },
   {
-    title: 'Content Editor & Writer',
-    company: '[Previous Company Name]',
-    location: '[Location]',
-    description: '[Please provide your previous work experience details here - I\'ll update this with your specific experience, achievements, and responsibilities]',
-    skills: ['Content Writing', 'Copy Editing', 'Proofreading', 'Content Strategy']
+    title: 'Proofreader',
+    company: '7Sage',
+    companyUrl: 'https://7sage.com',
+    location: 'New York | Remote',
+    period: 'October 2021 - Present',
+    description: 'Providing meticulous proofreading services for law school admission materials at an education consulting firm. Reviewing personal statements, diversity statements, recommendations, and complete applications before submission to schools. Ensuring error-free, polished content that helps prospective law students present their best applications.',
+    skills: ['Proofreading', 'Academic Writing', 'Legal Documents', 'Application Review', 'Quality Assurance', 'Educational Content']
+  },
+  {
+    title: 'Content Editor',
+    company: 'Enterprise DNA',
+    companyUrl: 'https://blog.enterprisedna.co',
+    location: 'New Zealand | Remote',
+    period: 'March 2023 - February 2024',
+    description: 'Served as content editor for a leading e-learning platform\'s blog. Generated keyword-optimized content using Ahrefs research and GPT-4 assistance. Edited and humanized AI-generated content, removing common AI patterns. Optimized content using SurferSEO for improved Google SERP rankings. Created quality visual content and managed team expansion by training and vetting new Upwork hires.',
+    skills: ['Content Editing', 'SEO Optimization', 'AI Content Editing', 'Ahrefs', 'SurferSEO', 'Team Training', 'Visual Content Creation']
+  },
+  {
+    title: 'Developmental Editor',
+    company: 'The Book Clinic',
+    companyUrl: 'https://thebookclinic.net',
+    location: 'Michigan | Remote',
+    period: 'January 2016 - July 2021',
+    description: 'Worked as developmental editor at a comprehensive writing and publishing service. Guided clients through transforming concepts and manuscripts into polished books and ebooks. Contributed to client success stories including published works, award winners, bestseller achievements, and books selling tens of thousands of copies.',
+    skills: ['Developmental Editing', 'Manuscript Development', 'Publishing Guidance', 'Client Collaboration', 'Book Production', 'Editorial Strategy']
+  },
+  {
+    title: 'Content Writer',
+    company: 'Ujumbe Ink',
+    companyUrl: 'https://ujumbemagazine.com',
+    location: 'Arusha, Tanzania',
+    period: 'January 2011 - March 2014',
+    description: 'Served as chief contributor and content writer for a quarterly publication in Tanzania. Produced high-quality editorial content and feature articles over three years, helping establish the magazine\'s editorial voice and readership engagement.',
+    skills: ['Content Writing', 'Editorial Writing', 'Magazine Publishing', 'Feature Articles', 'Editorial Strategy', 'Cultural Content']
   }
 ];
 ---
@@ -25,18 +56,18 @@ const experiences = [
     <div class="text-center mb-16">
       <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">Work Experience</h2>
     </div>
-
     <div class="max-w-4xl mx-auto">
       <!-- Timeline -->
       <div class="relative">
         <!-- Vertical Line -->
         <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-700"></div>
-
         {experiences.map(experience => (
           <ExperienceItem 
             title={experience.title}
             company={experience.company}
+            companyUrl={experience.companyUrl}
             location={experience.location}
+            period={experience.period}
             description={experience.description}
             skills={experience.skills}
           />
