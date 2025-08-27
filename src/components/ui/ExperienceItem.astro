@@ -3,12 +3,14 @@
 export interface Props {
   title: string;
   company: string;
+  companyUrl?: string;
   location: string;
+  period: string;
   description: string;
   skills: string[];
 }
 
-const { title, company, location, description, skills } = Astro.props;
+const { title, company, companyUrl, location, period, description, skills } = Astro.props;
 ---
 
 <div class="relative flex items-start mb-12">
@@ -26,7 +28,24 @@ const { title, company, location, description, skills } = Astro.props;
       <svg class="w-4 h-4 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
       </svg>
-      <span class="text-gray-300">{company}</span>
+      {companyUrl ? (
+        <a 
+          href={companyUrl} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="text-blue-400 hover:text-blue-300 transition-colors duration-200 underline decoration-1 underline-offset-2 hover:decoration-2"
+        >
+          {company}
+        </a>
+      ) : (
+        <span class="text-gray-300">{company}</span>
+      )}
+    </div>
+    <div class="flex items-center mb-2">
+      <svg class="w-4 h-4 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      <span class="text-gray-400">{period}</span>
     </div>
     <div class="flex items-center mb-6">
       <svg class="w-4 h-4 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
